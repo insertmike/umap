@@ -267,6 +267,7 @@ def spectral_layout(
     random_state,
     metric="euclidean",
     metric_kwds={},
+    method=None,
     tol=0.0,
     maxiter=0
 ):
@@ -289,6 +290,13 @@ def spectral_layout(
     random_state: numpy RandomState or equivalent
         A state capable being used as a numpy random state.
 
+    method: str (optional, default None, values either 'eigsh' or 'lobpcg')
+        Name of the eigenvalue computation method to use to compute the spectral
+        embedding. If left to None (or empty string), as by default, the method is
+        chosen from the number of vectors in play: larger vector collections are
+        handled with lobpcg, smaller collections with eigsh. Method names correspond
+        to SciPy routines in scipy.sparse.linalg.
+        
     tol: float, default chosen by implementation
         Stopping tolerance for the numerical algorithm computing the embedding.
 
@@ -309,6 +317,7 @@ def spectral_layout(
         metric=metric,
         metric_kwds=metric_kwds,
         init="random",
+        method=method,
         tol=tol,
         maxiter=maxiter
     )
